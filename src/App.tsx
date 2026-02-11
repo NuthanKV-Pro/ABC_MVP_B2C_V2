@@ -10,6 +10,7 @@ import Questionnaire from "./pages/Questionnaire";
 import Dashboard from "./pages/Dashboard";
 import ReturnHistory from "./pages/ReturnHistory";
 import NoticeHistory from "./pages/NoticeHistory";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/return-history" element={<ReturnHistory />} />
           <Route path="/notice-history" element={<NoticeHistory />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
