@@ -186,6 +186,16 @@ const Dashboard = () => {
             </div>
           </motion.section>
 
+          {/* Page Divider */}
+          <div className="relative flex items-center justify-center py-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t-2 border-gold/40" style={{ borderImage: 'linear-gradient(90deg, transparent, hsl(var(--gold)), transparent) 1' }} />
+            </div>
+            <span className="relative bg-background px-4 font-display text-lg font-semibold text-gold tracking-wide">
+              Current Year Compliance
+            </span>
+          </div>
+
           {/* Advance Tax Schedule */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
