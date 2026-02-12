@@ -169,7 +169,7 @@ const Login = () => {
         <DialogContent className="dark border-border bg-card text-foreground max-w-lg">
           <DialogHeader>
             <DialogTitle className="font-display text-xl gold-text-gradient">
-              Disclosure Agreement
+              Draft Disclosure Agreement
             </DialogTitle>
             <DialogDescription className="text-muted-foreground text-xs">
               Please read carefully before proceeding.
