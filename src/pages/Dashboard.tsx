@@ -53,6 +53,26 @@ const Dashboard = () => {
   }>({ open: false });
 
   const pan = sessionStorage.getItem("abc_pan") || "ABCDE1234F";
+  const fullName = "Rajesh Kumar Sharma";
+  const dob = "15-08-1985";
+
+  // Calculate age in years and months
+  const dobDate = new Date(1985, 7, 15); // Aug 15, 1985
+  const now = new Date();
+  let ageYears = now.getFullYear() - dobDate.getFullYear();
+  let ageMonths = now.getMonth() - dobDate.getMonth();
+  if (ageMonths < 0 || (ageMonths === 0 && now.getDate() < dobDate.getDate())) {
+    ageYears--;
+    ageMonths += 12;
+  }
+  if (now.getDate() < dobDate.getDate()) {
+    ageMonths--;
+    if (ageMonths < 0) ageMonths += 12;
+  }
+
+  const panLower = pan.toLowerCase();
+  const dobFormatted = "15081985"; // DDMMYYYY
+  const userId = `${panLower}${dobFormatted}`;
 
   return (
     <div className="dark min-h-screen bg-background text-foreground">
@@ -63,14 +83,33 @@ const Dashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-8 rounded-2xl border border-border bg-card p-6"
         >
-          <h1 className="font-display text-3xl font-bold">
-            Welcome, <span className="text-gold">User</span>
+          <h1 className="font-display text-2xl font-bold">
+            Welcome, <span className="text-gold">{fullName}</span>
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            PAN: {pan} &bull; Dashboard Overview
-          </p>
+          <div className="mt-3 grid gap-1.5 text-sm text-muted-foreground sm:grid-cols-2 md:grid-cols-4">
+            <div>
+              <span className="text-xs uppercase tracking-wider">Full Name</span>
+              <p className="font-medium text-foreground">{fullName}</p>
+            </div>
+            <div>
+              <span className="text-xs uppercase tracking-wider">PAN</span>
+              <p className="font-medium text-gold">{pan}</p>
+            </div>
+            <div>
+              <span className="text-xs uppercase tracking-wider">Date of Birth</span>
+              <p className="font-medium text-foreground">{dob}</p>
+            </div>
+            <div>
+              <span className="text-xs uppercase tracking-wider">Age</span>
+              <p className="font-medium text-foreground">{ageYears} Years {ageMonths} Months</p>
+            </div>
+          </div>
+          <div className="mt-3 pt-3 border-t border-border">
+            <span className="text-xs text-muted-foreground">User ID: </span>
+            <span className="text-xs font-mono text-gold">{userId}</span>
+          </div>
         </motion.div>
 
         <div className="space-y-8">
