@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Pause, Play, Square } from "lucide-react";
 
 const steps = [
   "Connecting to Income Tax Portal...",
@@ -14,12 +15,19 @@ const steps = [
 const Loading = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (paused) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
       setCurrentStep((prev) => {
         if (prev >= steps.length - 1) {
-          clearInterval(interval);
+          if (intervalRef.current) clearInterval(intervalRef.current);
           setTimeout(() => navigate("/questionnaire"), 800);
           return prev;
         }
@@ -27,8 +35,10 @@ const Loading = () => {
       });
     }, 1200);
 
-    return () => clearInterval(interval);
-  }, [navigate]);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [navigate, paused]);
 
   const progress = ((currentStep + 1) / steps.length) * 100;
 
@@ -40,7 +50,9 @@ const Loading = () => {
         className="w-full max-w-lg px-4 text-center"
       >
         <div className="font-display text-4xl font-bold gold-text-gradient">ABC</div>
-        <p className="mt-2 text-sm text-muted-foreground">Processing your data</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {paused ? "Paused — take your time" : "Processing your data"}
+        </p>
 
         <div className="mt-12">
           <div className="mx-auto h-2 w-full max-w-sm overflow-hidden rounded-full bg-secondary">
@@ -88,6 +100,24 @@ const Loading = () => {
               </span>
             </motion.div>
           ))}
+        </div>
+
+        {/* Pause & Stop buttons */}
+        <div className="mt-10 flex items-center justify-center gap-4">
+          <button
+            onClick={() => setPaused((p) => !p)}
+            className="flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:border-gold/30 transition-colors"
+          >
+            {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+            {paused ? "Resume" : "Pause"}
+          </button>
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 rounded-lg border border-destructive/30 px-5 py-2.5 text-sm text-destructive hover:bg-destructive/10 transition-colors"
+          >
+            <Square className="h-4 w-4" />
+            Stop
+          </button>
         </div>
       </motion.div>
     </div>
