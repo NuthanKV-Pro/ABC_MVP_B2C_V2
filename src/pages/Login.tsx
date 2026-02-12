@@ -15,8 +15,8 @@ import Footer from "@/components/Footer";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [pan, setPan] = useState("");
-  const [password, setPassword] = useState("");
+  const [pan, setPan] = useState("ABCDE1234F");
+  const [password, setPassword] = useState("Demo@1234");
   const [error, setError] = useState("");
   const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
