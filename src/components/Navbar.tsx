@@ -20,8 +20,9 @@ const Navbar = ({ isLoggedIn = false }: { isLoggedIn?: boolean }) => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2">
           <span className="font-display text-xl font-bold gold-text-gradient">ABC</span>
-          <span className="hidden text-sm text-muted-foreground sm:inline">
-            AnyBody can Consult
+          <span className="hidden sm:inline">
+            <span className="text-sm text-muted-foreground">AnyBody can Consult</span>
+            <span className="block text-[10px] text-muted-foreground">By <span className="text-gold font-medium">Nuthan Kaparthy</span></span>
           </span>
         </Link>
 
@@ -47,6 +48,14 @@ const Navbar = ({ isLoggedIn = false }: { isLoggedIn?: boolean }) => {
         <div className="flex items-center gap-3">
           {isLoggedIn ? (
             <>
+              <a
+                href="https://abcweb2.lovable.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                ABC Web
+              </a>
               <Link
                 to="/profile"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
