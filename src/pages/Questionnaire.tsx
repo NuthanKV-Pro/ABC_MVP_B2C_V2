@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -112,6 +113,14 @@ const Questionnaire = () => {
           transition={{ duration: 0.4 }}
           className="w-full max-w-xl"
         >
+          <button
+            onClick={() => navigate("/")}
+            className="mb-4 flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </button>
+
           {/* Progress */}
           <div className="mb-8">
             <div className="flex items-center justify-between text-xs text-muted-foreground">
