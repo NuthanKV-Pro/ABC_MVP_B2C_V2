@@ -58,7 +58,7 @@ const Index = () => {
               <span className="gold-text-gradient">AnyBody can Consult</span>
             </h1>
             <p className="mt-2 font-display text-lg text-muted-foreground md:text-xl">
-              (<span className="gold-text-gradient font-semibold">MVP</span>) by Nuthan Kaparthy
+              By <span className="gold-text-gradient font-semibold">Nuthan Kaparthy</span>
             </p>
           </motion.div>
 
